@@ -1,0 +1,2 @@
+ALTER TABLE invoice
+    ALTER COLUMN token TYPE VARCHAR(1000);

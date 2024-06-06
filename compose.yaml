@@ -1,0 +1,35 @@
+version: '3.7'
+services:
+  api-spring:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    depends_on:
+      - postgres
+    environment:
+      - 'URL_DATA_BASE=jdbc:postgresql://ep-spring-bread-a5zbuuh4.us-east-2.aws.neon.tech/integracion'
+      - 'DATABASE_USERNAME=Integracion_owner'
+      - 'DATABASE_PASSWORD=dVlrCEL3HqI9'
+      - 'API_KEY=441CFF82-A48B-480E-A8A3-4CB5L66313B2'
+      - 'SECRET_KEY=1edc26ecef4736409a922490f6b243064681f407'
+      - 'TOKEN=ClavePublica'
+    networks:
+      - mi-red
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=mydatabase'
+      - 'POSTGRES_PASSWORD=secret'
+      - 'POSTGRES_USER=myuser'
+    ports:
+      - '5432:5432'
+    networks:
+      - mi-red
+
+
+networks:
+  mi-red:
+    driver: bridge
+

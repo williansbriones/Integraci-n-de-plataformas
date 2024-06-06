@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: "app"
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    url: ${URL_DATA_BASE}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+management:
+  server:
+    port: 8080
