@@ -34,8 +34,8 @@ public class FlowServiceImpl implements FlowService {
     params.add("email", email);
     params.add("commerceOrder", UUID.randomUUID().toString());
     params.add(
-        "urlConfirmation", "https://motopapis.fly.dev/invoice/confirm");
-    params.add("urlReturn", "http://flowosccomerce.tuxpan.com/csepulveda/api2/pay/resultPay.php");
+        "urlConfirmation", "https://webhook.site/f98c1cfc-d742-4a80-b0b5-c5d5491bc829");
+    params.add("urlReturn", "https://www.google.com/");
     String sing = flowUtils.createSing(params);
     params.add("s", sing);
     return restClient

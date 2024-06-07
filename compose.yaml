@@ -17,6 +17,14 @@ services:
       - 'TOKEN=ClavePublica'
     networks:
       - mi-red
+  dotnet:
+    build:
+      context: ../FerreteriaApi/FerreteriaAPI
+      dockerfile: Dockerfile
+    ports:
+      - '8081:80'
+    networks:
+      - mi-red
   postgres:
     image: 'postgres:latest'
     environment:

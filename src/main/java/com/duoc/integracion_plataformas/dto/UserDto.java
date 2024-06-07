@@ -1,6 +1,5 @@
 package com.duoc.integracion_plataformas.dto;
 
-
 import com.duoc.integracion_plataformas.entity.UserEntity;
 import com.duoc.integracion_plataformas.enums.UserType;
 import jakarta.validation.constraints.Email;
@@ -19,7 +18,7 @@ public record UserDto(
             message = "Email is not valid",
             regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
         String email,
-    @NotNull @Size(min = 1, max = 50) String password,
+    String password,
     UserType userType,
     List<InvoiceDto> invoices) {
 

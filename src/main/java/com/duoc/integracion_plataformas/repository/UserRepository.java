@@ -17,4 +17,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
   Long checkRepeated(String username, String email);
 
   Optional<UserEntity> findByEmail(String email);
+
+  Optional<UserEntity> findByPasswordAndEmail(String password, String email);
+
+  Optional<UserEntity> findByEmailAndPassword(String email, String password);
 }

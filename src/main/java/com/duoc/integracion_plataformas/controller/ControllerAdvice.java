@@ -10,11 +10,13 @@ import com.duoc.integracion_plataformas.exeption.UserException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
 @RestControllerAdvice
+@CrossOrigin(origins = "*")
 public class ControllerAdvice {
 
   private final ErrorDto errorDto = new ErrorDto("500", "error", null);

@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/invoice")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class InvoiceController {
 
   private final InvoiceService invoiceService;

@@ -2,7 +2,9 @@ package com.duoc.integracion_plataformas.controller;
 
 
 import com.duoc.integracion_plataformas.dto.FlowResponseDto;
+import com.duoc.integracion_plataformas.dto.TokenLoginDto;
 import com.duoc.integracion_plataformas.dto.UserDto;
+import com.duoc.integracion_plataformas.dto.LoginDto;
 import com.duoc.integracion_plataformas.exeption.UserException;
 import com.duoc.integracion_plataformas.service.iface.FlowService;
 import com.duoc.integracion_plataformas.service.iface.UserService;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
+@CrossOrigin(origins = "*")
 public class UserController {
 
   private final UserService userService;
@@ -51,8 +54,15 @@ public class UserController {
     Boolean existUser = userService.existUser(id);
     return new ResponseEntity<>(existUser, HttpStatus.OK);
   }
+  @PostMapping("/create/no/register")
+  public ResponseEntity<UserDto> newUser() {
+    return ResponseEntity.ok(userService.newUserNoRegister());
+  }
 
-
+  @PostMapping("/login")
+  public ResponseEntity<UserDto> login(@RequestBody @Valid LoginDto loginDto) {
+    return userService.login(loginDto);
+  }
 
 
   //test de flow service
