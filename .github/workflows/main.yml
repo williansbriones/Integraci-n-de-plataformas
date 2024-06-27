@@ -23,6 +23,7 @@ jobs:
           echo "${EC2_SSH_KEY}" > key.pem
           chmod 600 key.pem
           ssh -o StrictHostKeyChecking=no -i key.pem ${EC2_USER}@${EC2_HOST} << 'EOF'
+            echo ${REPO_DIR}
             cd ${REPO_DIR}
             git pull origin main
             docker-compose down
