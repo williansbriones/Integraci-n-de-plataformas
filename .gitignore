@@ -21,6 +21,8 @@ target/
 *.iml
 *.ipr
 
+ApiKey.pem
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
