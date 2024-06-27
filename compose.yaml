@@ -6,8 +6,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - '8080:8080'
-    depends_on:
-      - postgres
+#    depends_on:
+#      - postgres
     environment:
       - 'URL_DATA_BASE=jdbc:postgresql://ep-spring-bread-a5zbuuh4.us-east-2.aws.neon.tech/integracion'
       - 'DATABASE_USERNAME=Integracion_owner'
