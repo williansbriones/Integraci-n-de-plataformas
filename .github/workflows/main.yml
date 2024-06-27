@@ -27,7 +27,7 @@ jobs:
           echo ${REPO_DIR}
             cd ${REPO_DIR}
             
-            git clone origin ${URL_REPO}
+            git clone ${URL_REPO}
             rm -rf Integraci-n-de-plataformas
             cd Integraci-n-de-plataformas
             docker-compose down
