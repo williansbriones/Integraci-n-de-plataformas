@@ -13,43 +13,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set environment variables
-        run: |
-          echo "Setting up environment variables"
-          echo "EC2_SSH_KEY=${{ secrets.EC2_SSH_KEY }}" > env_vars.sh
-          echo "EC2_USER=ec2-user" >> env_vars.sh
-          echo "EC2_HOST=${{ secrets.EC2_PUBLIC_IP }}" >> env_vars.sh
-          echo "REPO_DIR=/home/ec2-user/integracion" >> env_vars.sh
-          echo "URL_REPO=${{ secrets.URL_REPO }}" >> env_vars.sh
-
       - name: Deploy to EC2
+        env:
+          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+          EC2_USER: ec2-user
+          EC2_HOST: ${{ secrets.EC2_PUBLIC_IP }}
+          REPO_DIR: /home/ec2-user/integracion
+          URL_REPO: ${{ secrets.URL_REPO }}
         run: |
-          source env_vars.sh
-          echo "Connecting to EC2 instance at $EC2_HOST"
-          echo "$EC2_SSH_KEY" > key.pem
+          echo "${EC2_SSH_KEY}" > key.pem
           chmod 600 key.pem
-          ssh -o StrictHostKeyChecking=no -i key.pem $EC2_USER@$EC2_HOST << EOF
-            echo "Environment Variables:"
-            echo "REPO_DIR=$REPO_DIR"
-            echo "URL_REPO=$URL_REPO"
-
-            if [ -z "$URL_REPO" ]; then
-              echo "ERROR: URL_REPO is not set"
-              exit 1
-            fi
-
-            echo "Removing old repository directory"
-            rm -rf $REPO_DIR/Integraci-n-de-plataformas
-
-            echo "Cloning repository"
-            git clone $URL_REPO $REPO_DIR/Integraci-n-de-plataformas
-
-            cd $REPO_DIR/Integraci-n-de-plataformas
-
-            echo "Stopping Docker Compose services"
+          ssh -o StrictHostKeyChecking=no -i key.pem ${EC2_USER}@${EC2_HOST} << 'EOF'
+          echo ${REPO_DIR}
+            cd ${REPO_DIR}
+            ls
+            pwd
+            rm -rf Integraci-n-de-plataformas
+            git clone ${URL_REPO}
+            cd Integraci-n-de-plataformas
             docker-compose down
-
-            echo "Starting Docker Compose services"
             docker-compose up -d
           EOF
           rm -f key.pem
