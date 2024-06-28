@@ -25,13 +25,15 @@ jobs:
           chmod 600 key.pem
           ssh -o StrictHostKeyChecking=no -i key.pem ${EC2_USER}@${EC2_HOST} << 'EOF'
           echo ${REPO_DIR}
-            cd ${REPO_DIR}
             ls
             pwd
             rm -rf Integraci-n-de-plataformas
-            git clone https://github.com/williansbriones/Integraci-n-de-plataformas
+            ls
+            git clone https://github.com/williansbriones/Integraci-n-de-plataformas.git
             cd Integraci-n-de-plataformas
             docker-compose down
+            docker rm $(docker ps -aq)
+            docker rmi $(docker images -q)
             docker-compose up -d
           EOF
           rm -f key.pem
