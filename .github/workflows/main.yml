@@ -31,7 +31,8 @@ jobs:
             ls
             git clone https://github.com/williansbriones/Integraci-n-de-plataformas.git
             cd Integraci-n-de-plataformas
-            docker-compose down
+            docker-compose down --rmi all --volumes --remove-orphans
+            docker ps -a
             docker rmi integraci-n-de-plataformas-api-spring
             docker-compose up -d
           EOF
