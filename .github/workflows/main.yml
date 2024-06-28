@@ -29,7 +29,7 @@ jobs:
             pwd
             rm -rf Integraci-n-de-plataformas
             ls
-            git clone https://github.com/williansbriones/Integraci-n-de-plataformas
+            git clone https://github.com/williansbriones/Integraci-n-de-plataformas.git
             cd Integraci-n-de-plataformas
             docker-compose down
             docker-compose up -d
