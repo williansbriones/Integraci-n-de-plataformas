@@ -31,4 +31,10 @@ public class InvoiceController {
   public List<InvoiceDto> listPaid() {
     return invoiceService.getListPaid();
   }
+
+  @GetMapping("/listUnpaid/{id}")
+    public List<InvoiceDto> listUnpaid(@PathVariable("id") Long id) {
+        return invoiceService.getListUnpaid(id);
+    }
+
 }

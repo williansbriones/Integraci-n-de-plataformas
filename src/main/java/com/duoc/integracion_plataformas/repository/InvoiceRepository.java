@@ -12,4 +12,6 @@ public interface InvoiceRepository extends JpaRepository<InvoiceEntity, Long> {
   Optional<InvoiceEntity> findByToken(String token);
 
   List<InvoiceEntity> findByStateInvoice(StateInvoice stateInvoice);
+
+  List<InvoiceEntity> findByUser_Id(Long id);
 }

@@ -11,6 +11,5 @@ public record ProductDto(
         String Category,
         Integer price,
         Integer count,
-        Integer total,
         String image
 ) {}

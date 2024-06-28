@@ -93,4 +93,21 @@ public class InvoiceServiceImp implements InvoiceService {
 
     return invoiceList;
   }
+
+  @Override
+  public List<InvoiceDto> getListUnpaid(Long id) {
+    return invoiceRepository.findByUser_Id(id).stream().map(
+            invoiceEntity ->
+                    InvoiceDto.builder()
+                            .id(invoiceEntity.getId())
+                            .productos(null)
+                            .fecha(Timestamp.from(invoiceEntity.getDate()))
+                            .estado(invoiceEntity.getStateInvoice())
+                            .total(invoiceEntity.getTotal())
+                            .idCaja(invoiceEntity.getIdCashier())
+                            .user(UserDto.builder().id(invoiceEntity.getUser().getId()).build())
+                            .token(invoiceEntity.getToken())
+                            .build())
+            .toList();
+  }
 }

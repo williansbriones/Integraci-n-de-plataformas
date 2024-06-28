@@ -12,4 +12,6 @@ public interface InvoiceService {
   void confirmInvoice(String token);
 
   List<InvoiceDto> getListPaid();
+
+  List<InvoiceDto> getListUnpaid(Long id);
 }
