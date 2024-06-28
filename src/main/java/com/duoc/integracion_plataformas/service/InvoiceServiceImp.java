@@ -5,6 +5,8 @@ import com.duoc.integracion_plataformas.dto.InvoiceDto;
 import com.duoc.integracion_plataformas.exeption.InternalException;
 import com.duoc.integracion_plataformas.exeption.UserException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import com.duoc.integracion_plataformas.dto.PreInvoice;
@@ -26,6 +28,7 @@ import static com.duoc.integracion_plataformas.enums.StateInvoice.PENDING;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class InvoiceServiceImp implements InvoiceService {
 
   private final InvoiceRepository invoiceRepository;
@@ -36,9 +39,13 @@ public class InvoiceServiceImp implements InvoiceService {
   @Transactional
   public String createInvoice(PreInvoice preInvoice) {
 
+
+    log.info("Productos of preInvoice {}",preInvoice);
     UserDto userDto = userService.getUserById(preInvoice.idUser());
 
     FlowResponseDto flowRespose = flowService.CreateOrder(preInvoice.total(), userDto.email());
+
+    log.info("flowResponse {}", flowRespose);
 
     InvoiceEntity invoiceEntity =
         InvoiceEntity.builder()
@@ -53,6 +60,9 @@ public class InvoiceServiceImp implements InvoiceService {
             .build();
 
     invoiceEntity = invoiceRepository.save(invoiceEntity);
+
+    log.info("invoice created {}",invoiceEntity);
+
 
     return flowRespose.url() + "?token=" + flowRespose.token();
   }
@@ -87,6 +97,8 @@ public class InvoiceServiceImp implements InvoiceService {
                     .build())
         .toList();
 
+    log.info("list Invoice {}", invoiceList);
+
     if(invoiceList.isEmpty()){
       throw new UserException("404", HttpStatus.NOT_FOUND, "No invoices found");
     };
@@ -96,7 +108,9 @@ public class InvoiceServiceImp implements InvoiceService {
 
   @Override
   public List<InvoiceDto> getListUnpaid(Long id) {
-    return invoiceRepository.findByUser_Id(id).stream().map(
+
+    log.info("invoice of id user {}", id);
+    var a = invoiceRepository.findByUser_Id(id).stream().map(
             invoiceEntity ->
                     InvoiceDto.builder()
                             .id(invoiceEntity.getId())
@@ -109,5 +123,8 @@ public class InvoiceServiceImp implements InvoiceService {
                             .token(invoiceEntity.getToken())
                             .build())
             .toList();
+
+    log.info("invoice of client id {} invoice: {}", id, a);
+    return a;
   }
 }

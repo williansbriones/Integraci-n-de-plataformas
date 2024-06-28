@@ -6,6 +6,8 @@ import com.duoc.integracion_plataformas.service.iface.FlowService;
 import com.duoc.integracion_plataformas.util.iface.FlowUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
+@Log4j2
 public class FlowServiceImpl implements FlowService {
 
   private final RestClient restClient = RestClient.create();
@@ -26,6 +29,7 @@ public class FlowServiceImpl implements FlowService {
   @Override
   @SneakyThrows
   public FlowResponseDto CreateOrder(int amount, String email) {
+    log.info("generando orden de pago por {}", amount);
     LinkedMultiValueMap<String, String> params = new LinkedMultiValueMap<>();
     params.add("apiKey", flowUtils.getKey());
     params.add("subject", "Pago Online");
