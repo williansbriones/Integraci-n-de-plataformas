@@ -24,31 +24,31 @@ public class ProductServiceImpl implements ProductService {
   private final RestClient restClient = RestClient.create();
   private final ProductRepository productRepository;
 
-  @Override
-  public ProductExternalDto getProductById(int id) {
-    return restClient
-        .get()
-        .uri("https://api.escuelajs.co/api/v1/products/{id}", id)
-        .accept(APPLICATION_JSON)
-            .retrieve()
-            .onStatus(HttpStatusCode::is4xxClientError, (request, response) -> {
-                throw new UserException(
-                    "error automatico si encuentra un error 400",
-                    HttpStatus.BAD_REQUEST,
-                    "Error en el servidor");
-
-            }).body(ProductExternalDto.class);
-        //.exchange(
-        //    (request, response) -> {
-        //      if (response.getStatusCode().is4xxClientError()) {
-        //        throw new UserException(
-        //            "error automatico si encuentra un error 400",
-        //            HttpStatus.BAD_REQUEST,
-        //            "Error en el servidor");
-        //      }
-        //      return convertResponse(response);
-        //    });
-  }
+  //@Override
+  //public ProductExternalDto getProductByIdExternal(int id) {
+  //  return restClient
+  //      .get()
+  //      .uri("https://api.escuelajs.co/api/v1/products/{id}", id)
+  //      .accept(APPLICATION_JSON)
+  //          .retrieve()
+  //          .onStatus(HttpStatusCode::is4xxClientError, (request, response) -> {
+  //              throw new UserException(
+  //                  "error automatico si encuentra un error 400",
+  //                  HttpStatus.BAD_REQUEST,
+  //                  "Error en el servidor");
+//
+  //          }).body(ProductExternalDto.class);
+  //      //.exchange(
+  //      //    (request, response) -> {
+  //      //      if (response.getStatusCode().is4xxClientError()) {
+  //      //        throw new UserException(
+  //      //            "error automatico si encuentra un error 400",
+  //      //            HttpStatus.BAD_REQUEST,
+  //      //            "Error en el servidor");
+  //      //      }
+  //      //      return convertResponse(response);
+  //      //    });
+  //}
 
     @Override
     public List<ProductDto> getAllProducts() {

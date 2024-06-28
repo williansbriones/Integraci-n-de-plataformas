@@ -2,7 +2,6 @@ package com.duoc.integracion_plataformas.controller;
 
 
 import com.duoc.integracion_plataformas.dto.ProductDto;
-import com.duoc.integracion_plataformas.dto.ProductExternalDto;
 import com.duoc.integracion_plataformas.service.iface.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,7 @@ public class ProductController {
     }
 
     @GetMapping("/get/{id}")
-    public ProductExternalDto getProductById(@PathVariable int id) {
+    public ProductDto getProductById(@PathVariable long id) {
         return productService.getProductById(id);
     }
 

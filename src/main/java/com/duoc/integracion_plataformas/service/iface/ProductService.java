@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    public ProductExternalDto getProductById(int id);
+    //public ProductExternalDto getProductByIdExternal(int id);
 
     public ProductDto getProductById(Long id);
 
