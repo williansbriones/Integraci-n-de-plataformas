@@ -14,7 +14,7 @@ public record PreInvoice(
       throw new UserException("400", HttpStatus.BAD_REQUEST,"idUser is required");
     }
     int total =
-        preInvoice.products().stream().mapToInt(product -> product.price() * product.count()).sum();
+        preInvoice.products().stream().mapToInt(product -> product.price() * product.count()    ).sum();
 
     return new PreInvoice(Instant.now(), preInvoice.products(), preInvoice.idUser(), total);
   }

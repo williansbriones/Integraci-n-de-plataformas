@@ -21,9 +21,9 @@ public class ProductEntity {
   private String name;
   private String description;
   @Column(name = "Category_product")
-  private CategoryProduct Category;
+  private String Category;
   private Integer price;
   private Integer stock;
-  private Integer total;
+  @Column(name = "imagen")
   private String image;
 }

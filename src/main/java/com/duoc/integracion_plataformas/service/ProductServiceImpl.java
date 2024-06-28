@@ -59,7 +59,6 @@ public class ProductServiceImpl implements ProductService {
                 .Category(product.getCategory())
                 .price(product.getPrice())
                 .count(product.getStock())
-                .total(product.getTotal())
                 .image(product.getImage())
                 .build()).toList();
 
@@ -76,7 +75,6 @@ public class ProductServiceImpl implements ProductService {
                 .Category(product.getCategory())
                 .price(product.getPrice())
                 .count(product.getStock())
-                .total(product.getTotal())
                 .image(product.getImage())
                 .build();
     }
