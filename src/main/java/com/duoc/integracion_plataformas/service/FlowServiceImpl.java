@@ -34,7 +34,7 @@ public class FlowServiceImpl implements FlowService {
     params.add("email", email);
     params.add("commerceOrder", UUID.randomUUID().toString());
     params.add(
-        "urlConfirmation", "https://107.23.165.138:8080/invoice/confirm");
+        "urlConfirmation", "http://107.23.165.138:8080/invoice/confirm");
     params.add("urlReturn", "https://www.youtube.com/watch?v=dQw4w9WgXcQ");
     String sing = flowUtils.createSing(params);
     params.add("s", sing);
