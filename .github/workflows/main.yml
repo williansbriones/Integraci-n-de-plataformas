@@ -32,8 +32,8 @@ jobs:
             git clone https://github.com/williansbriones/Integraci-n-de-plataformas.git
             cd Integraci-n-de-plataformas
             docker-compose down
-            docker rm $(docker ps -aq)
-            docker rmi $(docker images -q)
+            docker rm $(docker ps -aq) -f
+            docker rmi $(docker images -q) -f
             docker-compose up -d
           EOF
           rm -f key.pem
