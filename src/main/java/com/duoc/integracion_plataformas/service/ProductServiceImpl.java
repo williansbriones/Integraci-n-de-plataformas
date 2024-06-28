@@ -1,13 +1,18 @@
 package com.duoc.integracion_plataformas.service;
 
+import com.duoc.integracion_plataformas.dto.ProductDto;
 import com.duoc.integracion_plataformas.dto.ProductExternalDto;
+import com.duoc.integracion_plataformas.entity.ProductEntity;
 import com.duoc.integracion_plataformas.exeption.UserException;
+import com.duoc.integracion_plataformas.repository.ProductRepository;
 import com.duoc.integracion_plataformas.service.iface.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
+
+import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
@@ -17,6 +22,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 public class ProductServiceImpl implements ProductService {
 
   private final RestClient restClient = RestClient.create();
+  private final ProductRepository productRepository;
 
   @Override
   public ProductExternalDto getProductById(int id) {
@@ -43,4 +49,36 @@ public class ProductServiceImpl implements ProductService {
         //      return convertResponse(response);
         //    });
   }
+
+    @Override
+    public List<ProductDto> getAllProducts() {
+        List<ProductDto> products = productRepository.findAll().stream().map(product -> ProductDto.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .description(product.getDescription())
+                .Category(product.getCategory())
+                .price(product.getPrice())
+                .count(product.getStock())
+                .total(product.getTotal())
+                .image(product.getImage())
+                .build()).toList();
+
+        return products;
+    }
+
+    @Override
+    public ProductDto getProductById(Long id) {
+        ProductEntity product = productRepository.findById(id).orElseThrow(() -> new UserException("Producto no encontrado", HttpStatus.NOT_FOUND, "Producto no encontrado"));
+        return ProductDto.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .description(product.getDescription())
+                .Category(product.getCategory())
+                .price(product.getPrice())
+                .count(product.getStock())
+                .total(product.getTotal())
+                .image(product.getImage())
+                .build();
+    }
+
 }
