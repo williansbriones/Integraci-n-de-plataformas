@@ -32,13 +32,7 @@ jobs:
             git clone https://github.com/williansbriones/Integraci-n-de-plataformas.git
             cd Integraci-n-de-plataformas
             docker-compose down
-            docker rm -f $(docker ps -aq)
-            if [ "$(docker images -q)" ]; then
-                docker rmi -f $(docker images -q)
-            else
-                echo "No hay imágenes para eliminar"
-            fi
-
+            docker rmi integraci-n-de-plataformas-api-spring
             docker-compose up -d
           EOF
           rm -f key.pem
