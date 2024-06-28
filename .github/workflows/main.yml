@@ -33,7 +33,12 @@ jobs:
             cd Integraci-n-de-plataformas
             docker-compose down
             docker rm -f $(docker ps -aq)
-            docker rmi -f $(docker images -q)
+            if [ "$(docker images -q)" ]; then
+                docker rmi -f $(docker images -q)
+            else
+                echo "No hay imágenes para eliminar"
+            fi
+
             docker-compose up -d
           EOF
           rm -f key.pem
