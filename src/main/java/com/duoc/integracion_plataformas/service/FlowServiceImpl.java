@@ -39,7 +39,7 @@ public class FlowServiceImpl implements FlowService {
     params.add("commerceOrder", UUID.randomUUID().toString());
     params.add(
         "urlConfirmation", "http://107.23.165.138:8080/invoice/confirm");
-    params.add("urlReturn", "https://webhook.site/c0e22bab-d389-4bd9-890a-913ec90fb82b");
+    params.add("urlReturn", "https://7915p2bywd.execute-api.us-east-1.amazonaws.com/dev/redirection");
     String sing = flowUtils.createSing(params);
     params.add("s", sing);
     return restClient
