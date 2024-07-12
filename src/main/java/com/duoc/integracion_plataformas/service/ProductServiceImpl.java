@@ -30,6 +30,7 @@ public class ProductServiceImpl implements ProductService {
 
   //@Override
   public ListProduct getAllProductsExternal() {
+      log.info("Consultando productos externos");
       var requestProduct = restClient
         .get()
         .uri("https://aplicaciontestferreteria.azurewebsites.net/api/producto")
@@ -48,6 +49,7 @@ public class ProductServiceImpl implements ProductService {
   }
 
     public ProductRequest getProductsExternal(Long id) {
+        log.info("Consultando producto externos");
         var requestProduct = restClient
                 .get()
                 .uri("https://aplicaciontestferreteria.azurewebsites.net/api/producto/{id}", id)
