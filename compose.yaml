@@ -15,7 +15,6 @@ services:
       - 'API_KEY=441CFF82-A48B-480E-A8A3-4CB5L66313B2'
       - 'SECRET_KEY=1edc26ecef4736409a922490f6b243064681f407'
       - 'TOKEN=ClavePublica'
-      -
 ##    networks:
 ##      - mi-red
 ##  dotnet:
